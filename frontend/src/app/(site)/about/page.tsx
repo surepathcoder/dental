@@ -14,7 +14,7 @@ const VALUES = [
   { icon: MessageSquare, title: "Explain, then treat", body: "You'll always know what we see, what your options are and what it costs before anything starts." },
   { icon: HeartHandshake, title: "Comfort first", body: "Calm rooms, gentle hygienists and comfort options for anxious patients — no judgment, ever." },
   { icon: ShieldCheck, title: "Honest recommendations", body: "We prioritize treatment: what's urgent, what can wait and what's optional." },
-  { icon: Sparkles, title: "Modern tools", body: "Digital X-rays, 3D scanning and implant planning — plus an AI receptionist so you're never on hold." },
+  { icon: Sparkles, title: "Modern tools", body: "Digital X-rays, 3D scanning and implant planning — plus an online assistant so you're never on hold." },
 ]
 
 export default function AboutPage() {
@@ -28,7 +28,7 @@ export default function AboutPage() {
 
       <section className="container-page grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2">
         <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-          <Image src="/images/clinic-chair.jpg" alt="Treatment room" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+          <Image src="/images/african-consultation.webp" alt="An African dentist taking time to explain care to a patient" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
         </div>
         <div>
           <SectionHeading
@@ -64,9 +64,9 @@ export default function AboutPage() {
               <Bot className="size-6" />
             </span>
             <div className="max-w-3xl">
-              <h2 className="font-display text-2xl font-medium text-ink sm:text-3xl">About our AI receptionist</h2>
+              <h2 className="font-display text-2xl font-medium text-ink sm:text-3xl">About our online assistant</h2>
               <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-                The AI receptionist is an assistant — not a person and not a dentist. It answers questions using verified information about this practice
+                The online assistant is an assistant — not a person and not a dentist. It answers questions using verified information about this practice
                 (services, hours, insurance, pricing), checks real appointment availability and books visits. It never diagnoses conditions or recommends
                 treatment; those decisions are always made by our dentists after an exam.
               </p>

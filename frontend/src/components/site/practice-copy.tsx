@@ -8,14 +8,20 @@ import { FinalCTA } from "@/components/site/shared"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 export function PracticeHeroCopy() {
-  const { clinic } = useClinic()
+  const { clinic, demoMode } = useClinic()
   return (
     <>
-      <p className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-card px-3 py-1 text-xs font-semibold text-primary shadow-sm">
-        Family, cosmetic &amp; implant dentistry · {clinic.city}, {clinic.state}
-      </p>
-      <h1 className="font-display mt-6 text-[2.75rem] leading-[1.02] font-medium text-ink sm:text-6xl lg:text-[4.25rem]">
-        {clinic.tagline.includes(".") ? (
+      <h1 className="editorial-hero-title">
+        {demoMode ? (
+          <>
+            <span className="title-line">
+              <span>Feel good.</span>
+            </span>
+            <span className="title-line">
+              <em>Smile freely.</em>
+            </span>
+          </>
+        ) : clinic.tagline.includes(".") ? (
           <>
             {clinic.tagline.split(".")[0]}.
             <br />
@@ -29,10 +35,6 @@ export function PracticeHeroCopy() {
           </>
         )}
       </h1>
-      <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-        {clinic.name} brings experienced dentists, transparent pricing and same-day emergency care together in one calm, modern practice — with an AI
-        receptionist that answers questions and books your visit any time of day.
-      </p>
     </>
   )
 }
@@ -70,7 +72,12 @@ export function PracticeContactCard() {
           <li className="flex gap-3">
             <MapPin className="mt-0.5 size-4.5 shrink-0 text-primary" />
             <span>
-              <a href={`https://maps.google.com/?q=${maps}`} className="block font-medium text-ink hover:text-primary" target="_blank" rel="noreferrer">
+              <a
+                href={`https://maps.google.com/?q=${maps}`}
+                className="block font-medium text-ink hover:text-primary"
+                target="_blank"
+                rel="noreferrer"
+              >
                 {clinic.address}
               </a>
               <span className="block text-muted-foreground">{clinic.cityLine}</span>
@@ -114,15 +121,17 @@ export function PracticeAboutCopy() {
   return (
     <>
       <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
-        Today the practice brings general, cosmetic, implant and orthodontic care together under one roof at {clinic.address}, {clinic.cityLine}. We keep
-        emergency time open every weekday, accept most major PPO plans, and offer financing so cost never gets in the way of care.
+        Today the practice brings general, cosmetic, implant and orthodontic care together under one roof at {clinic.address},{" "}
+        {clinic.cityLine}. We keep emergency time open every weekday, explain every cost upfront so it never gets in
+        the way of care.
       </p>
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-        If something needs a human, {clinic.assistantName} hands you to our front desk at {clinic.phone}. In a medical emergency, call 911.
+        If something needs a human, {clinic.assistantName} hands you to our front desk at {clinic.phone}. In a medical emergency, call your local emergency number.
       </p>
       {demoMode && (
         <p className="mt-6 rounded-xl bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900">
-          This website is a portfolio demo. Patient reviews and dashboard figures shown here are demonstration data unless they came from a live booking.
+          This website is a portfolio demo. Patient reviews and dashboard figures shown here are demonstration data unless they came from a
+          live booking.
         </p>
       )}
     </>
@@ -196,13 +205,13 @@ export function PracticeChatPreview() {
           <Sparkles className="size-4" />
         </span>
         <div>
-          <p className="text-xs font-semibold text-ink">{clinic.assistantName} · AI Receptionist</p>
+          <p className="text-xs font-semibold text-ink">{clinic.assistantName} · Online assistant</p>
           <p className="text-[11px] text-muted-foreground">Replies instantly, day or night</p>
         </div>
       </div>
       <p className="mt-3 rounded-xl rounded-tl-sm bg-muted px-3 py-2 text-[13px] leading-snug text-ink">
-        Good news — we&apos;re in-network with {clinic.insurance[0] || "most PPO plans"}. I have openings tomorrow at 8:30 and 10:00 AM. Want me to book
-        one?
+        Good news — we&apos;re in-network with {clinic.insurance[0] || "your insurer"}. I have openings tomorrow at 8:30 and 10:00 AM.
+        Want me to book one?
       </p>
       <div className="mt-2 flex gap-1.5">
         <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold text-primary-foreground">8:30 AM</span>
@@ -224,14 +233,14 @@ export function PrivacyBody() {
         {
           title: "This is a demonstration website",
           body: [
-            `${clinic.name} is shown here to demonstrate an AI receptionist and patient automation platform.`,
+            `${clinic.name} is shown here to demonstrate an online assistant and patient automation platform.`,
             "Please do not enter real patient information, protected health information (PHI), payment details or any other sensitive data anywhere on this site.",
           ],
         },
         {
           title: "What this demo collects",
           body: [
-            "When you chat with the AI receptionist or submit a form, the text you type, along with any name, phone number, email address, treatment interest, insurance name and appointment preference you provide, is stored so the workflow can be shown end-to-end.",
+            "When you chat with the online assistant or submit a form, the text you type, along with any name, phone number, email address, treatment interest, insurance name and appointment preference you provide, is stored so the workflow can be shown end-to-end.",
             "Technical information such as your IP address is used briefly for rate limiting and audit logging.",
           ],
         },
@@ -247,14 +256,14 @@ export function PrivacyBody() {
         {
           title: `Information ${clinic.name} collects`,
           body: [
-            `When you chat with our AI receptionist or submit a form, we store the name, phone, email, treatment interest and appointment details you provide so ${clinic.name} can answer you and book your visit.`,
+            `When you chat with our online assistant or submit a form, we store the name, phone, email, treatment interest and appointment details you provide so ${clinic.name} can answer you and book your visit.`,
             "Technical information such as your IP address may be used for rate limiting and security logging.",
           ],
         },
         {
           title: "How information is used",
           body: [
-            "We use it to operate this website, the AI receptionist, appointment confirmations, reminders and follow-ups.",
+            "We use it to operate this website, the online assistant, appointment confirmations, reminders and follow-ups.",
             "Message text may be sent to an AI provider to generate responses. Email and SMS providers send confirmations only when those services are connected.",
           ],
         },
@@ -280,8 +289,8 @@ export function PrivacyBody() {
         <div>
           <h2 className="text-xl font-semibold text-ink">A note on HIPAA</h2>
           <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-            This software is not a HIPAA-compliant system by default and must not be used to process protected health information until a production
-            deployment includes a compliance review, signed business associate agreements, encryption and access controls.
+            This software is not a HIPAA-compliant system by default and must not be used to process protected health information until a
+            production deployment includes a compliance review, signed business associate agreements, encryption and access controls.
           </p>
         </div>
         <div>
@@ -310,13 +319,15 @@ export function TermsBody() {
         {
           title: "Not medical advice",
           body: [
-            `The AI receptionist provides general information about ${clinic.name}. It does not diagnose conditions, recommend treatment or provide medical advice.`,
-            "If you have a medical emergency, call 911 or go to the nearest emergency room.",
+            `The online assistant provides general information about ${clinic.name}. It does not diagnose conditions, recommend treatment or provide medical advice.`,
+            "If you have a medical emergency, call your local emergency number or go to the nearest hospital.",
           ],
         },
         {
           title: "Appointments in demo mode",
-          body: ["Bookings may be stored as demo records. A real calendar appointment is only created when the practice turns off demo mode and connects scheduling."],
+          body: [
+            "Bookings may be stored as demo records. A real calendar appointment is only created when the practice turns off demo mode and connects scheduling.",
+          ],
         },
       ]
     : [
@@ -329,13 +340,15 @@ export function TermsBody() {
         {
           title: "Not medical advice",
           body: [
-            `The AI receptionist provides general information about ${clinic.name}. It does not diagnose conditions, recommend treatment or provide medical advice. Always consult a licensed dentist or physician about your own health.`,
-            "If you have a medical emergency, call 911 or go to the nearest emergency room.",
+            `The online assistant provides general information about ${clinic.name}. It does not diagnose conditions, recommend treatment or provide medical advice. Always consult a licensed dentist or physician about your own health.`,
+            "If you have a medical emergency, call your local emergency number or go to the nearest hospital.",
           ],
         },
         {
           title: "Appointments",
-          body: ["Bookings made on this site create a request with the practice. You will receive confirmation by email or text when those channels are connected."],
+          body: [
+            "Bookings made on this site create a request with the practice. You will receive confirmation by email or text when those channels are connected.",
+          ],
         },
       ]
   return (

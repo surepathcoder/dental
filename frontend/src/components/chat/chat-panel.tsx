@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useRef } from "react"
-import { ArrowUp, Bot, LayoutDashboard, Loader2, RotateCcw, ShieldAlert, Sparkles, Workflow, X } from "lucide-react"
+import { ArrowUp, LayoutDashboard, MessageCircle, Loader2, RotateCcw, ShieldAlert, Sparkles, Workflow, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
@@ -173,7 +173,9 @@ function DemoSummary() {
 
 export function ChatPanel({ variant = "widget" }: { variant?: "widget" | "embed" }) {
   const { open, setOpen, messages, busy, draft, setDraft, send, restart, demo, openWith } = useChat()
-  const { clinic, demoMode } = useClinic()
+  const { clinic, demoMode, prospect } = useClinic()
+  const emergencyNumber =
+    prospect && !["", "United States", "US", "USA"].includes(prospect.country) ? "your local emergency number" : "911"
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const embed = variant === "embed"
@@ -206,20 +208,22 @@ export function ChatPanel({ variant = "widget" }: { variant?: "widget" | "embed"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls="ai-receptionist"
+        aria-label={open ? "Close chat" : "Chat with us"}
         className={cn(
           "fixed right-4 bottom-4 z-50 flex items-center gap-2.5 rounded-full bg-primary py-2 pr-4 pl-2 text-sm font-semibold text-primary-foreground shadow-xl shadow-primary/25 transition hover:bg-primary/90 sm:right-6 sm:bottom-6",
           open && "max-sm:hidden",
           !open && messages.length === 0 && "pulse-ring",
         )}
       >
-        <span className="grid size-9 place-items-center rounded-full bg-white/15">{open ? <X className="size-4" /> : <Bot className="size-5" />}</span>
-        <span>{open ? "Close" : "Ask our AI Receptionist"}</span>
+        <span className="grid size-9 place-items-center rounded-full bg-white/15">{open ? <X className="size-4" /> : <MessageCircle className="size-5" />}</span>
+        <span className="hidden sm:inline">{open ? "Close" : "Chat with us"}</span>
+        <span className="sm:hidden">{open ? "Close" : "Chat"}</span>
       </button>
       )}
 
       <section
         id="ai-receptionist"
-        aria-label="AI receptionist chat"
+        aria-label="Chat with us"
         className={cn(
           "flex flex-col overflow-hidden bg-background",
           embed
@@ -237,7 +241,7 @@ export function ChatPanel({ variant = "widget" }: { variant?: "widget" | "embed"
             <Sparkles className="size-5" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold">{clinic.assistantName} · AI Receptionist</p>
+            <p className="text-sm font-semibold">{clinic.assistantName} · Online assistant</p>
             <p className="flex items-center gap-1.5 text-xs text-white/80">
               <span className={cn("size-1.5 rounded-full", messages.some((m) => m.response?.waiting_staff) ? "bg-violet-300" : "bg-emerald-300")} />
               {messages.some((m) => m.response?.waiting_staff) ? "Waiting for front desk" : `${clinic.name} · replies instantly`}
@@ -266,7 +270,7 @@ export function ChatPanel({ variant = "widget" }: { variant?: "widget" | "embed"
               <div className="flex items-start gap-2">
                 <Avatar small />
                 <p className="rounded-2xl rounded-tl-md bg-muted px-3.5 py-2.5 text-sm leading-relaxed text-ink">
-                  {clinic.greeting || `Hi! I'm ${clinic.assistantName}, ${clinic.name}'s AI receptionist. I can answer questions about services, insurance and hours — or book your visit in about a minute.`}
+                  {clinic.greeting || `Hi! I'm ${clinic.assistantName}, ${clinic.name}'s online assistant. I can answer questions about services, insurance and hours — or book your visit in about a minute.`}
                 </p>
               </div>
               <div className="flex flex-wrap gap-1.5 pl-9">
@@ -282,7 +286,7 @@ export function ChatPanel({ variant = "widget" }: { variant?: "widget" | "embed"
                 ))}
               </div>
               <p className="pl-9 text-[11px] leading-snug text-muted-foreground">
-                {clinic.assistantName} gives general information only and can&apos;t provide medical advice. In a medical emergency call 911.
+                {clinic.assistantName} gives general information only and can&apos;t provide medical advice. In a medical emergency call {emergencyNumber}.
               </p>
             </div>
           )}
@@ -316,7 +320,7 @@ export function ChatPanel({ variant = "widget" }: { variant?: "widget" | "embed"
             </Button>
           </div>
           <p className="mt-1.5 text-center text-[10px] text-muted-foreground">
-            AI assistant · general information only · <button type="button" className="underline underline-offset-2" onClick={() => openWith("I'd like to speak to a person")}>talk to a person</button>
+            Automated assistant · general information only · <button type="button" className="underline underline-offset-2" onClick={() => openWith("I'd like to speak to a person")}>talk to a person</button>
           </p>
         </form>
       </section>

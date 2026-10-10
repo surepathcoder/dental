@@ -64,7 +64,7 @@ function IntakeForm() {
       <div className="rounded-2xl border bg-card p-8 text-center">
         <CheckCircle2 className="mx-auto size-10 text-primary" />
         <h2 className="mt-4 text-xl font-semibold text-ink">Intake received</h2>
-        <p className="mt-2 text-sm text-muted-foreground">You're all set for {preview.data?.service}. See you {preview.data?.date_label}.</p>
+        <p className="mt-2 text-sm text-muted-foreground">You&apos;re all set for {preview.data?.service}. See you {preview.data?.date_label}.</p>
       </div>
     )
   }

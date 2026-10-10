@@ -2,7 +2,6 @@
 
 import { Bot, User, Workflow } from "lucide-react"
 
-import { fmtDateTime } from "@/lib/format"
 import type { Conversation } from "@/lib/types"
 import { cn } from "@/lib/utils"
 

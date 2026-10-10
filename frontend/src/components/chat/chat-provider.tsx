@@ -169,7 +169,7 @@ function embedParentPage(): string | null {
   return path.slice(0, 180)
 }
 
-export function ChatProvider({ children }: { children: React.ReactNode }) {
+export function ChatProvider({ children, demoLink }: { children: React.ReactNode; demoLink?: string }) {
   const [open, setOpenState] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [busy, setBusy] = useState(false)
@@ -279,6 +279,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       message: payload.message ?? "",
       action: payload.action ?? null,
       page: demoPage.current || embedParentPage() || (typeof window !== "undefined" ? window.location.pathname : "/"),
+      // A prospect's demo link: the assistant answers as their clinic.
+      ...(demoLink ? { demo: demoLink } : {}),
     }
     const apply = (res: ChatResponse) => {
       const priorId = conversationId.current

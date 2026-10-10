@@ -1,5 +1,5 @@
 // Marketing content for the FICTIONAL BrightSmile Dental practice.
-// The AI receptionist's knowledge base lives in backend/app/knowledge_base.py
+// The online assistant's knowledge base lives in backend/app/knowledge_base.py
 // and mirrors these facts.
 
 export const clinic = {
@@ -57,10 +57,10 @@ export const services: ServiceContent[] = [
     headline: "Preventive care that keeps small problems small.",
     intro:
       "Regular checkups are the foundation of a healthy smile. Our hygienists and dentists take the time to explain what we see, answer your questions, and build a prevention plan that fits your life.",
-    image: "/images/general.jpg",
-    imageAlt: "Dentist examining a patient's teeth",
+    image: "/images/african-family.webp",
+    imageAlt: "An African family enjoying a relaxed visit to the dental practice",
     icon: "stethoscope",
-    priceNote: "Most in-network PPO plans cover exams, cleanings and X-rays at 100%. Self-pay new patient special: $129.",
+    priceNote: "We explain the cost of your visit before we begin.",
     duration: "About 60 minutes for new patients",
     benefits: [
       { title: "Unhurried visits", body: "A full hour for new patients, so nothing feels rushed." },
@@ -88,15 +88,15 @@ export const services: ServiceContent[] = [
     headline: "A brighter, more confident smile — designed with you.",
     intro:
       "Whether you want a whiter shade for a big event or a complete smile makeover, we start with a conversation about your goals and show you realistic options before any treatment begins.",
-    image: "/images/cosmetic.jpg",
-    imageAlt: "Smiling woman outdoors",
+    image: "/images/african-dental-hero.webp",
+    imageAlt: "A smiling African woman with her dentist",
     icon: "sparkles",
     priceNote: "In-office whitening from $349. Veneers are quoted per tooth after a complimentary consultation.",
     duration: "45-minute complimentary consultation",
     benefits: [
       { title: "Complimentary consultation", body: "Talk through goals, options and pricing with no obligation." },
       { title: "Natural-looking results", body: "Shade and shape matched to your face, not a one-size-fits-all look." },
-      { title: "Financing available", body: "Spread the cost with CareCredit or Sunbit." },
+      { title: "Financing available", body: "Ask us about paying in instalments." },
     ],
     treatments: ["Professional teeth whitening", "Porcelain veneers", "Cosmetic bonding", "Smile makeovers", "Gum contouring", "Tooth-colored restorations"],
     steps: [
@@ -119,8 +119,8 @@ export const services: ServiceContent[] = [
     headline: "Replace missing teeth with confidence.",
     intro:
       "Dental implants are a long-term solution for missing teeth. Your consultation includes a 3D scan and a written plan with transparent pricing, so you can make the decision that's right for you.",
-    image: "/images/implants.jpg",
-    imageAlt: "Dentist reviewing dental X-rays",
+    image: "/images/african-consultation.webp",
+    imageAlt: "An African dentist explaining treatment options to a patient",
     icon: "anchor",
     priceNote: "Single implants (post, abutment and crown) typically start around $3,200. Exact quote after your consultation and 3D scan.",
     duration: "60-minute consultation with 3D CBCT scan",
@@ -139,7 +139,7 @@ export const services: ServiceContent[] = [
     faqs: [
       { q: "Am I a candidate for implants?", a: "Many adults are, but only an exam and 3D scan can determine that. Your dentist will review the results with you." },
       { q: "How long does the process take?", a: "It varies by case. Your written plan will include an estimated timeline." },
-      { q: "Do you offer financing for implants?", a: "Yes — through CareCredit and Sunbit, with options reviewed during your consultation." },
+      { q: "Do you offer financing for implants?", a: "Ask us about paying in instalments; we go through the options at your consultation." },
     ],
     chatPrompt: "I'm interested in dental implants",
   },
@@ -150,10 +150,10 @@ export const services: ServiceContent[] = [
     headline: "Straighter teeth, without metal braces.",
     intro:
       "Invisalign uses a series of custom clear aligners to gradually move your teeth. Start with a complimentary consultation and 3D scan to see a preview of your projected results.",
-    image: "/images/invisalign.jpg",
-    imageAlt: "Person placing a clear aligner",
+    image: "/images/african-dental-hero.webp",
+    imageAlt: "An African patient and dentist discussing a confident smile",
     icon: "smile",
-    priceNote: "Treatment typically ranges from $3,500 to $6,500. Consultations and 3D scans are complimentary. Many PPO plans include orthodontic benefits.",
+    priceNote: "Your cost depends on your treatment plan; we explain it fully at your consultation.",
     duration: "45-minute complimentary consultation",
     benefits: [
       { title: "Free iTero 3D scan", body: "No messy impressions — and a digital preview of your results." },
@@ -169,7 +169,7 @@ export const services: ServiceContent[] = [
     ],
     faqs: [
       { q: "How long does Invisalign take?", a: "It depends on your case. Your consultation includes an estimated timeline." },
-      { q: "Does insurance cover Invisalign?", a: "Many PPO plans include orthodontic benefits. We'll check your coverage for you." },
+      { q: "Does insurance cover Invisalign?", a: "We'll check what your insurance covers for you." },
       { q: "How many hours a day do I wear aligners?", a: "Your provider will give you specific instructions for your treatment plan." },
     ],
     chatPrompt: "I want Invisalign",
@@ -181,8 +181,8 @@ export const services: ServiceContent[] = [
     headline: "In pain? We keep time open for you today.",
     intro:
       "We reserve appointments every weekday for dental emergencies. Reach out as early as possible and we'll do our best to see you the same day.",
-    image: "/images/emergency.jpg",
-    imageAlt: "Dentist holding dental instruments",
+    image: "/images/african-consultation.webp",
+    imageAlt: "An African dentist listening to a patient's care needs",
     icon: "siren",
     priceNote: "Emergency exams with a focused X-ray start at $95 for self-pay patients and are often covered by insurance.",
     duration: "30-minute emergency visit",
@@ -200,7 +200,7 @@ export const services: ServiceContent[] = [
     ],
     faqs: [
       { q: "What counts as a dental emergency?", a: "Severe pain, a broken or knocked-out tooth, swelling, or a lost filling or crown are common reasons to call." },
-      { q: "When should I go to the ER instead?", a: "If you have difficulty breathing or swallowing, severe bleeding, major facial trauma or swelling spreading to your eye or neck, call 911 or go to the nearest emergency room." },
+      { q: "When should I go to the ER instead?", a: "If you have difficulty breathing or swallowing, severe bleeding, major facial trauma or swelling spreading to your eye or neck, call your local emergency number or go to the nearest hospital." },
       { q: "Can I be seen on Saturday?", a: "We're open Saturdays 9 AM–1 PM and will do our best to fit emergencies in." },
     ],
     chatPrompt: "I have a dental emergency",
@@ -213,28 +213,28 @@ export const team = [
   {
     name: "Dr. Emily Carter, DDS",
     role: "Founder & General Dentist",
-    image: "/images/team-carter.jpg",
+    image: "/images/african-dentist-woman.webp",
     bio: "Dr. Carter founded BrightSmile to make dental visits feel calm, clear and unhurried. She focuses on preventive and family dentistry.",
     focus: ["Family dentistry", "Preventive care", "Crowns & fillings"],
   },
   {
     name: "Dr. Marcus Reed, DMD",
     role: "Implant & Restorative Dentist",
-    image: "/images/team-reed.jpg",
+    image: "/images/african-dentist-man.webp",
     bio: "Dr. Reed leads our implant program, using 3D planning to restore missing teeth with predictable, natural-looking results.",
     focus: ["Dental implants", "Full-arch restorations", "Bridges"],
   },
   {
     name: "Dr. Priya Nair, DDS",
     role: "Cosmetic Dentist & Invisalign Provider",
-    image: "/images/team-nair.jpg",
+    image: "/images/african-dentist-young-woman.webp",
     bio: "Dr. Nair helps patients plan cosmetic and orthodontic treatment with digital previews, so there are no surprises.",
     focus: ["Invisalign", "Veneers", "Whitening"],
   },
   {
     name: "Daniel Ortiz, RDH",
     role: "Lead Dental Hygienist",
-    image: "/images/team-ortiz.jpg",
+    image: "/images/african-hygienist-man.webp",
     bio: "Daniel is known for gentle cleanings and clear explanations — and for putting nervous patients at ease.",
     focus: ["Cleanings", "Periodontal care", "Patient education"],
   },
@@ -242,7 +242,7 @@ export const team = [
 
 // Clearly fictional sample testimonials — shown with a "Demo testimonial" label.
 export const testimonials = [
-  { name: "Sarah M.", detail: "Invisalign patient", quote: "The AI assistant answered my insurance question at 10 PM and booked my consultation in two minutes. The team was just as easy to deal with in person." },
+  { name: "Sarah M.", detail: "Invisalign patient", quote: "The online assistant answered my insurance question at 10 PM and booked my consultation in two minutes. The team was just as easy to deal with in person." },
   { name: "James T.", detail: "Emergency visit", quote: "Cracked a tooth on a Saturday morning and was seen before noon. They explained everything before doing anything." },
   { name: "Priscilla R.", detail: "Family patient", quote: "We book all three kids back-to-back. Reminders by text mean we haven't missed a single appointment." },
 ]
@@ -250,11 +250,11 @@ export const testimonials = [
 export const faqs = [
   { q: "Do you accept my insurance?", a: "We're in-network with most major PPO plans, including Delta Dental, Cigna, Aetna, MetLife, Guardian, United Concordia, Blue Cross Blue Shield and Humana. We'll verify your benefits before your visit." },
   { q: "What if I don't have insurance?", a: "Our new patient special is $129 for an exam, cleaning and X-rays. The BrightSmile Membership ($29/month) covers preventive care and gives 15% off treatment." },
-  { q: "Do you offer financing?", a: "Yes, through CareCredit and Sunbit, with flexible monthly payment options." },
+  { q: "Do you offer financing?", a: "Ask us about paying in instalments." },
   { q: "Can I get a same-day emergency appointment?", a: "We reserve emergency appointments every weekday and will do our best to see you the same day." },
   { q: "What are your hours?", a: "Mon, Tue & Thu 8–5, Wed 8–6, Fri 8–3, Sat 9–1. Closed Sundays." },
   { q: "Where do I park?", a: "Free covered parking is available in front of the building at 4120 Bright Leaf Blvd." },
   { q: "Do you see children?", a: "Yes, from age 3. Many families book back-to-back appointments." },
   { q: "I'm nervous about the dentist. Can you help?", a: "Absolutely. Let us know — we'll go at your pace and discuss comfort options such as nitrous oxide for eligible patients." },
-  { q: "Is the AI receptionist a real person?", a: "No. Ava is an AI assistant that answers common questions and books appointments. It doesn't give medical advice — clinical decisions are always made by our dentists." },
+  { q: "Is the chat answered by a person?", a: "No. Our online assistant is automated: it answers common questions and books appointments. It doesn't give medical advice — clinical decisions are always made by our dentists." },
 ]

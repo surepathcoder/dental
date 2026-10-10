@@ -42,9 +42,20 @@ function digits(phone: string) {
 
 function phoneHref(phone: string) {
   const d = digits(phone)
+  if (phone.trim().startsWith("+")) return `tel:+${d}` // international already (+255 …): keep its country code
   if (d.length === 11 && d.startsWith("1")) return `tel:+${d}`
-  if (d.length === 10) return `tel:+1${d}`
+  if (d.length === 10 && !d.startsWith("0")) return `tel:+1${d}` // a US number; "0712 …" is a local one
   return phone ? `tel:${phone}` : fallbackClinic.phoneHref
+}
+
+/** "+255788479534" → "+255 788 479 534"; numbers already spaced, or not international, stay as written. */
+function formatPhone(phone: string) {
+  const t = phone.trim()
+  if (!t.startsWith("+") || /\s/.test(t)) return t
+  const d = digits(t)
+  if (d.length === 11 && d.startsWith("1")) return `+1 ${d.slice(1, 4)} ${d.slice(4, 7)} ${d.slice(7)}`
+  if (d.length === 12) return `+${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6, 9)} ${d.slice(9)}`
+  return t
 }
 
 function formatClock(value: string) {
@@ -79,8 +90,8 @@ function fromInfo(info: ClinicInfo | null): LiveClinic {
       insurance: fallbackClinic.insurance,
       assistantName: "Ava",
       greeting: fallbackClinic.tagline,
-      city: "Austin",
-      state: "TX",
+      city: "",
+      state: "",
       faqs: fallbackFaqs.map((f) => ({ question: f.q, answer: f.a })),
       activeServices: fallbackServices.map((s) => ({ slug: s.slug, name: s.name, short: s.short, duration: s.duration })),
       primaryColor: "#0f6b70",
@@ -94,7 +105,7 @@ function fromInfo(info: ClinicInfo | null): LiveClinic {
   return {
     name: info.name,
     tagline: info.tagline || fallbackClinic.tagline,
-    phone: info.phone,
+    phone: formatPhone(info.phone),
     phoneHref: phoneHref(info.phone),
     email: info.email,
     address: info.address_line,
@@ -120,22 +131,44 @@ function fromInfo(info: ClinicInfo | null): LiveClinic {
   }
 }
 
+/** A demo made for one prospect (/d/<token>): who it's for, who made it, and what we really know. */
+export interface ProspectDemo {
+  token: string
+  prepared_for: string
+  prepared_by: string
+  country: string
+  language: string
+  website: string
+  hours_known: boolean
+  expires_at: string
+}
+
 const ClinicContext = createContext<{
   clinic: LiveClinic
   demoMode: boolean
   status: SystemStatus | null
-}>({ clinic: fromInfo(null), demoMode: true, status: null })
+  prospect: ProspectDemo | null
+  loaded: boolean
+  missing: boolean
+}>({ clinic: fromInfo(null), demoMode: true, status: null, prospect: null, loaded: false, missing: false })
 
-export function ClinicProvider({ children }: { children: React.ReactNode }) {
-  const clinicQuery = useApi<ClinicInfo>("/clinic")
+export function ClinicProvider({ children, demoToken }: { children: React.ReactNode; demoToken?: string }) {
+  // A prospect's demo reads its own clinic; the practice site reads the practice.
+  const clinicQuery = useApi<ClinicInfo>(demoToken ? null : "/clinic")
+  const demoQuery = useApi<{ clinic: ClinicInfo; demo: Omit<ProspectDemo, "token"> }>(
+    demoToken ? `/demo-links/${encodeURIComponent(demoToken)}` : null,
+  )
   const statusQuery = useApi<SystemStatus>("/status")
   const value = useMemo(
     () => ({
-      clinic: fromInfo(clinicQuery.data),
-      demoMode: statusQuery.data?.demo_mode !== false,
+      clinic: fromInfo(demoToken ? (demoQuery.data?.clinic ?? null) : clinicQuery.data),
+      demoMode: demoToken ? false : statusQuery.data?.demo_mode !== false,
       status: statusQuery.data,
+      prospect: demoToken && demoQuery.data ? { ...demoQuery.data.demo, token: demoToken } : null,
+      loaded: demoToken ? Boolean(demoQuery.data || demoQuery.error) : Boolean(clinicQuery.data || clinicQuery.error),
+      missing: Boolean(demoToken && demoQuery.error),
     }),
-    [clinicQuery.data, statusQuery.data],
+    [clinicQuery.data, clinicQuery.error, demoQuery.data, demoQuery.error, statusQuery.data, demoToken],
   )
   return <ClinicContext.Provider value={value}>{children}</ClinicContext.Provider>
 }
@@ -154,6 +187,7 @@ export function applyBrandColor(hex: string) {
   if (!/^#[0-9A-Fa-f]{6}$/.test(hex)) return
   const root = document.documentElement
   root.style.setProperty("--primary", hex)
+  root.style.setProperty("--marketing-primary", hex)
   root.style.setProperty("--ring", hex)
   root.style.setProperty("--sidebar-primary", hex)
 }

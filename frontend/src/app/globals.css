@@ -135,22 +135,30 @@
 }
 
 @keyframes typing-dot {
-  0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
-  30% { opacity: 1; transform: translateY(-2px); }
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
 }
 .typing-dot {
   animation: typing-dot 1.2s infinite ease-in-out;
 }
 
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 oklch(0.47 0.08 196 / 0.45); }
-  80%, 100% { box-shadow: 0 0 0 14px oklch(0.47 0.08 196 / 0); }
+  0% {
+    box-shadow: 0 0 0 0 oklch(0.47 0.08 196 / 0.45);
+  }
+  80%,
+  100% {
+    box-shadow: 0 0 0 14px oklch(0.47 0.08 196 / 0);
+  }
 }
 .pulse-ring {
   animation: pulse-ring 2.4s infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .typing-dot, .pulse-ring { animation: none; }
-  html { scroll-behavior: auto; }
 }

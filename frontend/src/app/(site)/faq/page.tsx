@@ -16,7 +16,7 @@ export default function FaqPage() {
 
   return (
     <>
-      <PageHero eyebrow="FAQ" title="Questions patients ask us most." intro="Can't find your answer? Our AI receptionist replies instantly, 24/7 — or call us during office hours.">
+      <PageHero eyebrow="FAQ" title="Questions patients ask us most." intro="Can't find your answer? Our online assistant replies instantly, 24/7 — or call us during office hours.">
         <ChatCTA label="Ask a question" />
       </PageHero>
 

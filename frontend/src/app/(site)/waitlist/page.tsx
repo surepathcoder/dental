@@ -49,8 +49,8 @@ export default function WaitlistPage() {
         {state === "done" ? (
           <div className="rounded-2xl border bg-card p-8 text-center">
             <CheckCircle2 className="mx-auto size-10 text-primary" />
-            <h2 className="mt-4 text-xl font-semibold text-ink">You're on the list</h2>
-            <p className="mt-2 text-sm text-muted-foreground">We'll reach out if an earlier {(form.service || catalog[0]?.name || "visit").toLowerCase()} opening appears.</p>
+            <h2 className="mt-4 text-xl font-semibold text-ink">You&apos;re on the list</h2>
+            <p className="mt-2 text-sm text-muted-foreground">We&apos;ll reach out if an earlier {(form.service || catalog[0]?.name || "visit").toLowerCase()} opening appears.</p>
           </div>
         ) : (
           <form onSubmit={submit} className="rounded-2xl border bg-card p-6 sm:p-8">

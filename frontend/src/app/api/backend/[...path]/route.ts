@@ -16,6 +16,7 @@ const PUBLIC_ROUTES: { method: string; pattern: RegExp }[] = [
   { method: "POST", pattern: /^chat\/[a-f0-9]{32}\/end$/ },
   { method: "GET", pattern: /^chat\/[a-f0-9]{32}\/updates$/ },
   { method: "GET", pattern: /^clinic$/ },
+  { method: "GET", pattern: /^demo-links\/[A-Za-z0-9_-]{8,40}$/ },
   { method: "GET", pattern: /^status$/ },
   { method: "GET", pattern: /^health$/ },
   { method: "GET", pattern: /^appointments\/availability$/ },

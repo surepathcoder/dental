@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import type { BookedAppointment, ChatUI, Slot } from "@/lib/types"
 import { cn } from "@/lib/utils"
+import { useClinic } from "@/components/site/clinic-provider"
 
 export function SlotPicker({
   slots,
@@ -85,13 +86,19 @@ export function ContactCard({
   const [phone, setPhone] = useState(ui.prefill?.phone ?? "")
   const [email, setEmail] = useState(ui.prefill?.email ?? "")
   const [error, setError] = useState<string | null>(null)
+  const { prospect } = useClinic()
+  // A demo for a clinic abroad: their numbers and names, not Texas ones.
+  const abroad = Boolean(prospect && !["", "United States", "US", "USA"].includes(prospect.country))
+  const samplePhone = abroad ? "0712 345 678" : "(512) 555-0187"
+  const sampleName = abroad ? "Amina Juma" : "Jordan Miller"
+  const phoneValid = (v: string) => (abroad ? /^\+?[\d\s().-]{9,20}$/.test(v) && v.replace(/\D/g, "").length >= 9 : PHONE_OK(v))
   const followUpMode = Boolean(ui.optional?.length)
   const phoneFirst = Boolean(ui.phone_first) || (ui.missing?.length === 1 && ui.missing[0] === "phone")
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!phoneFirst && name.trim().length < 2) return setError("Please enter a name.")
-    if (phone && !PHONE_OK(phone)) return setError("Please enter a valid 10-digit US phone number.")
+    if (phone && !phoneValid(phone)) return setError(abroad ? "Please enter a valid phone number." : "Please enter a valid 10-digit US phone number.")
     if (email && !EMAIL_OK(email)) return setError("Please enter a valid email address.")
     if (phoneFirst && !phone) return setError("Please add a mobile number so we can reach you.")
     if (!phoneFirst && !followUpMode && (!phone || !email)) return setError("Please add both a phone number and an email.")
@@ -111,14 +118,14 @@ export function ContactCard({
           <Label htmlFor="cc-phone" className="text-[11px] text-muted-foreground">
             Mobile number
           </Label>
-          <Input id="cc-phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(512) 555-0187" inputMode="tel" autoComplete="off" className="h-9" disabled={disabled} maxLength={20} autoFocus={!disabled} />
+          <Input id="cc-phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={samplePhone} inputMode="tel" autoComplete="off" className="h-9" disabled={disabled} maxLength={20} autoFocus={!disabled} />
         </div>
       ) : (
         <div className="grid gap-1">
           <Label htmlFor="cc-name" className="text-[11px] text-muted-foreground">
             Full name
           </Label>
-          <Input id="cc-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Jordan Miller" autoComplete="off" className="h-9" disabled={disabled} maxLength={120} />
+          <Input id="cc-name" value={name} onChange={(e) => setName(e.target.value)} placeholder={sampleName} autoComplete="off" className="h-9" disabled={disabled} maxLength={120} />
         </div>
       )}
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -127,7 +134,7 @@ export function ContactCard({
             <Label htmlFor="cc-phone" className="text-[11px] text-muted-foreground">
               Mobile
             </Label>
-            <Input id="cc-phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(512) 555-0187" inputMode="tel" autoComplete="off" className="h-9" disabled={disabled} maxLength={20} />
+            <Input id="cc-phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={samplePhone} inputMode="tel" autoComplete="off" className="h-9" disabled={disabled} maxLength={20} />
           </div>
         )}
         {phoneFirst && (
@@ -135,7 +142,7 @@ export function ContactCard({
             <Label htmlFor="cc-name" className="text-[11px] text-muted-foreground">
               Name (optional)
             </Label>
-            <Input id="cc-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Jordan Miller" autoComplete="off" className="h-9" disabled={disabled} maxLength={120} />
+            <Input id="cc-name" value={name} onChange={(e) => setName(e.target.value)} placeholder={sampleName} autoComplete="off" className="h-9" disabled={disabled} maxLength={120} />
           </div>
         )}
         <div className="grid gap-1">

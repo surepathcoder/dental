@@ -6,7 +6,7 @@
   var origin = "";
   try {
     origin = (script && script.getAttribute("data-origin")) || new URL(script.src).origin;
-  } catch (e) {
+  } catch {
     origin = window.location.origin;
   }
   origin = String(origin).replace(/\/$/, "");

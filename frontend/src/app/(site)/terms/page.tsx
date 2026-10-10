@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Terms of Use", description: "Terms f
 export default function TermsPage() {
   return (
     <>
-      <PageHero eyebrow="Legal" title="Terms of use" intro="How this website and the AI receptionist may be used." />
+      <PageHero eyebrow="Legal" title="Terms of use" intro="How this website and the online assistant may be used." />
       <section className="container-page max-w-3xl py-16">
         <TermsBody />
       </section>

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 export function ChatCTA({
-  label = "Talk to Our AI Assistant",
+  label = "Ask us a question",
   message,
   variant = "light",
   className,

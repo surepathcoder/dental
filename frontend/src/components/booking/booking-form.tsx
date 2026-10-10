@@ -176,9 +176,9 @@ export function BookingForm({ defaultService }: { defaultService?: string }) {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <ol className="mb-8 flex items-center gap-2 text-sm">
+      <ol className="mb-6 flex items-center gap-2 rounded-2xl border bg-white p-4 text-sm" aria-label="Booking progress">
         {STEPS.map((label, i) => (
-          <li key={label} className="flex flex-1 items-center gap-2">
+          <li key={label} aria-current={i === step ? "step" : undefined} className="flex flex-1 items-center gap-2">
             <span
               className={cn(
                 "grid size-7 shrink-0 place-items-center rounded-full text-xs font-bold",
@@ -187,13 +187,13 @@ export function BookingForm({ defaultService }: { defaultService?: string }) {
             >
               {i < step ? <Check className="size-3.5" /> : i + 1}
             </span>
-            <span className={cn("font-medium", i === step ? "text-ink" : "text-muted-foreground")}>{label}</span>
+            <span className={cn("text-xs font-medium", i === step ? "text-ink" : "text-muted-foreground")}>{label}</span>
             {i < STEPS.length - 1 && <span className="hidden h-px flex-1 bg-border sm:block" />}
           </li>
         ))}
       </ol>
 
-      <div className="rounded-2xl border bg-card p-6 sm:p-8">
+      <div className="rounded-[1.35rem] border bg-card p-5 sm:p-7">
         {step === 0 && (
           <div>
             <h2 className="text-lg font-semibold text-ink">What do you need?</h2>
@@ -208,8 +208,9 @@ export function BookingForm({ defaultService }: { defaultService?: string }) {
                     setSlot(null)
                     setStep(1)
                   }}
+                  aria-pressed={service === s.name}
                   className={cn(
-                    "rounded-xl border p-4 text-left transition hover:border-primary hover:bg-secondary/40",
+                    "rounded-2xl border bg-white p-5 text-left transition hover:border-primary hover:bg-secondary/40 hover:shadow-sm",
                     service === s.name && "border-primary bg-secondary/40",
                   )}
                 >

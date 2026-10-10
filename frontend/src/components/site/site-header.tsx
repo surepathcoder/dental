@@ -3,18 +3,24 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import { ChevronDown, Menu, Phone } from "lucide-react"
+import { ArrowUpRight, ChevronDown, Menu, Phone } from "lucide-react"
 
 import { Logo } from "@/components/brand/logo"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { serviceHref, useClinic } from "@/components/site/clinic-provider"
 import { cn } from "@/lib/utils"
 
 const NAV = [
-  { href: "/about", label: "About" },
-  { href: "/team", label: "Our Team" },
+  { href: "/about", label: "Our story" },
+  { href: "/team", label: "Our team" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ]
@@ -22,28 +28,38 @@ const NAV = [
 export function SiteHeader() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const { clinic: live, demoMode } = useClinic()
+  const { clinic: live } = useClinic()
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/")
-  const city = live.raw?.city || "Austin"
+  const city = live.raw?.city || ""
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
-      <div className="container-page flex h-16 items-center justify-between gap-6 lg:h-[72px]">
+    <header className="site-header sticky top-0 z-40 border-b border-border/60 backdrop-blur-xl">
+      <div className="container-page flex h-20 items-center justify-between gap-5 lg:h-[88px]">
         <Link href="/" aria-label={`${live.name} home`}>
           <Logo name={live.name} city={city} />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+          <Link
+            href="/"
+            aria-current={pathname === "/" ? "page" : undefined}
+            className={cn(
+              "rounded-full px-3.5 py-2 text-[13px] font-medium text-ink/75 transition-colors hover:bg-secondary",
+              pathname === "/" && "bg-secondary text-primary",
+            )}
+          >
+            Home
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger
               className={cn(
-                "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-ink/80 outline-none hover:text-primary data-[state=open]:text-primary",
+                "inline-flex items-center gap-1 rounded-full px-3 py-2 text-[13px] font-medium text-ink/75 outline-none hover:bg-secondary data-[state=open]:text-primary",
                 active("/services") && "text-primary",
               )}
             >
               Services <ChevronDown className="size-3.5" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-72 p-1.5">
+            <DropdownMenuContent align="start" className="marketing-shell w-72 p-1.5">
               {live.activeServices.map((s) => (
                 <DropdownMenuItem key={s.slug || s.name} asChild className="cursor-pointer flex-col items-start gap-0.5 rounded-lg p-2.5">
                   <Link href={serviceHref(s.slug)}>
@@ -59,18 +75,33 @@ export function SiteHeader() {
             </DropdownMenuContent>
           </DropdownMenu>
           {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className={cn("rounded-md px-3 py-2 text-sm font-medium text-ink/80 hover:text-primary", active(n.href) && "text-primary")}>
+            <Link
+              key={n.href}
+              href={n.href}
+              aria-current={active(n.href) ? "page" : undefined}
+              className={cn(
+                "rounded-full px-3 py-2 text-[13px] font-medium text-ink/75 transition-colors hover:bg-secondary",
+                active(n.href) && "bg-secondary text-primary",
+              )}
+            >
               {n.label}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href={live.phoneHref} className="hidden items-center gap-2 text-sm font-semibold text-ink xl:inline-flex">
-            <Phone className="size-4 text-primary" /> {live.phone}
+          <a
+            href={live.phoneHref}
+            aria-label={`Call ${live.phone}`}
+            title={live.phone}
+            className="hidden size-11 items-center justify-center rounded-full border text-primary transition-colors hover:bg-secondary xl:inline-flex"
+          >
+            <Phone className="size-4" />
           </a>
-          <Button asChild className="hidden h-10 rounded-full px-5 sm:inline-flex">
-            <Link href="/book">Book an Appointment</Link>
+          <Button asChild className="hidden h-11 rounded-full px-5 text-xs sm:inline-flex">
+            <Link href="/book">
+              Book a visit <ArrowUpRight className="size-4" />
+            </Link>
           </Button>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
@@ -78,7 +109,7 @@ export function SiteHeader() {
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[88vw] max-w-sm overflow-y-auto">
+            <SheetContent side="right" className="marketing-shell data-[side=right]:w-[88vw] data-[side=right]:max-w-sm overflow-y-auto">
               <SheetHeader>
                 <SheetTitle>
                   <Logo name={live.name} city={city} />
@@ -87,13 +118,26 @@ export function SiteHeader() {
               <nav className="flex flex-col gap-1 px-4 pb-6" aria-label="Mobile">
                 <p className="px-2 pt-2 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">Services</p>
                 {live.activeServices.map((s) => (
-                  <Link key={s.slug || s.name} href={serviceHref(s.slug)} onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2.5 text-[15px] font-medium text-ink hover:bg-muted">
+                  <Link
+                    key={s.slug || s.name}
+                    href={serviceHref(s.slug)}
+                    onClick={() => setMobileOpen(false)}
+                    className="rounded-lg px-2 py-2.5 text-[15px] font-medium text-ink hover:bg-muted"
+                  >
                     {s.name}
                   </Link>
                 ))}
                 <p className="px-2 pt-4 pb-1 text-xs font-semibold tracking-wider text-muted-foreground uppercase">Practice</p>
-                {[{ href: "/", label: "Home" }, ...NAV, ...(demoMode ? [{ href: "/admin/login", label: "Clinic dashboard (demo)" }] : [])].map((n) => (
-                  <Link key={n.href} href={n.href} onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2.5 text-[15px] font-medium text-ink hover:bg-muted">
+                {[
+                  { href: "/", label: "Home" },
+                  ...NAV,
+                ].map((n) => (
+                  <Link
+                    key={n.href}
+                    href={n.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="rounded-lg px-2 py-2.5 text-[15px] font-medium text-ink hover:bg-muted"
+                  >
                     {n.label}
                   </Link>
                 ))}

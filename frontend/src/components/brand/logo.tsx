@@ -17,11 +17,13 @@ export function Logo({ className, light = false, name, city }: { className?: str
   const display = (name || "BrightSmile").replace(/\s+Dental$/i, "")
   const place = city || "Dental"
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
+    <span className={cn("brand-logo inline-flex items-center gap-2.5", className)}>
       <ToothMark />
       <span className={cn("leading-none", light ? "text-white" : "text-ink")}>
-        <span className="font-display block text-[1.15rem] font-semibold tracking-tight">{display}</span>
-        <span className={cn("block text-[0.62rem] font-semibold uppercase tracking-[0.22em]", light ? "text-white/70" : "text-primary")}>
+        <span className="brand-name font-display block text-[1.15rem] font-semibold tracking-tight">{display}</span>
+        <span
+          className={cn("mt-1 block text-[0.55rem] font-semibold uppercase tracking-[0.24em]", light ? "text-white/70" : "text-primary")}
+        >
           {place}
         </span>
       </span>

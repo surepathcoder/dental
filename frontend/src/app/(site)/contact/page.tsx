@@ -8,13 +8,13 @@ import { PageHero } from "@/components/site/shared"
 
 export const metadata: Metadata = {
   title: "Contact & Directions",
-  description: "Call, email or message the practice — or chat with our AI receptionist 24/7.",
+  description: "Call, email or message the practice — or chat with our online assistant 24/7.",
 }
 
 export default function ContactPage() {
   return (
     <>
-      <PageHero eyebrow="Contact" title="We're easy to reach — day or night." intro="Call during office hours, send a message, or ask our AI receptionist anything at any time.">
+      <PageHero eyebrow="Contact" title="We're easy to reach — day or night." intro="Call during office hours, send a message, or ask our online assistant anything at any time.">
         <ChatCTA />
       </PageHero>
 
@@ -27,7 +27,7 @@ export default function ContactPage() {
               <h2 className="font-semibold text-ink">Dental emergency?</h2>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                 Call us as early as you can — we reserve same-day appointments every weekday. If you have difficulty breathing or swallowing, severe bleeding or
-                major facial trauma, call 911 or go to the nearest emergency room.
+                major facial trauma, call your local emergency number or go to the nearest hospital.
               </p>
             </div>
           </div>

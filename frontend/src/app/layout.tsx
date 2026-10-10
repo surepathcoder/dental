@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { fetchClinic } from "@/lib/clinic-server"
 
 import "./globals.css"
+import "./editorial.css"
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" })
 const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], display: "swap", axes: ["opsz"] })
@@ -27,21 +28,21 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description: "Website visitor → AI receptionist → qualified lead → booked appointment → automated follow-up.",
-      images: ["/images/hero-clinic.jpg"],
+      images: ["/images/african-dental-hero.webp"],
     },
     robots: { index: false, follow: false },
   }
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0f6b70",
+  themeColor: "#f7f5f0",
   width: "device-width",
   initialScale: 1,
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} h-full antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${fraunces.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <AnalyticsProvider />
         <TooltipProvider delayDuration={200}>{children}</TooltipProvider>

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
   const { slug } = await params
   const service = serviceBySlug(slug)
   if (!service) return { title: "Service not found" }
-  return { title: `${service.name} in Austin, TX`, description: service.short }
+  return { title: service.name, description: service.short }
 }
 
 export default async function ServicePage({ params }: PageProps<"/services/[slug]">) {
@@ -113,7 +113,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           <div className="rounded-2xl bg-sand p-6">
             <h3 className="font-semibold text-ink">Questions before booking?</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Our AI receptionist can check your insurance, explain costs and find a time that fits — 24 hours a day.
+              Our online assistant can check your insurance, explain costs and find a time that fits — 24 hours a day.
             </p>
             <ChatCTA label="Chat about this" message={service.chatPrompt} className="mt-4 w-full" />
           </div>

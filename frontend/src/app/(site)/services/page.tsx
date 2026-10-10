@@ -23,7 +23,7 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-      <FinalCTA title="Not sure which visit you need?" intro="Our AI receptionist can help you figure it out and book the right appointment in about a minute." />
+      <FinalCTA title="Not sure which visit you need?" intro="Our online assistant can help you figure it out and book the right appointment in about a minute." />
     </>
   )
 }
