@@ -91,7 +91,7 @@ export function SiteFooter() {
               </>
             ) : (
               <>
-                © {new Date().getFullYear()} {clinic.name}. AI assistant provides general information only — not medical advice.
+                © {new Date().getFullYear()} {clinic.name}. Our online chat gives general information only — not medical advice.
               </>
             )}
           </p>

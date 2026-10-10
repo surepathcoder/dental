@@ -15,19 +15,22 @@ const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], dis
 export async function generateMetadata(): Promise<Metadata> {
   const info = await fetchClinic()
   const name = info?.name || "Dental Practice"
-  const tagline = info?.tagline || "Modern Dental Care"
-  const city = info ? `${info.city}, ${info.state}` : ""
+  const tagline = (info?.tagline || "Modern Dental Care").replace(/[.\s]+$/, "")
+  // "Dar es salaam, Dar es salaam" when the region has the city's name: say it once
+  const parts = info ? [info.city, info.state].filter(Boolean) : []
+  const city = [...new Map(parts.map((p) => [p.trim().toLowerCase(), p.trim()])).values()].join(", ")
   const title = city ? `${name} — ${tagline} in ${city}` : `${name} — ${tagline}`
+  const description = `${name}${city ? ` in ${city}` : ""} — ${tagline}. Book online or ask us about treatments and insurance, any time.`
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
     title: {
       default: title,
       template: `%s · ${name}`,
     },
-    description: `${name}${city ? ` in ${city}` : ""} — ${tagline}. 24/7 AI receptionist for questions, insurance and online booking.`,
+    description,
     openGraph: {
       title,
-      description: "Website visitor → AI receptionist → qualified lead → booked appointment → automated follow-up.",
+      description,
       images: ["/images/african-dental-hero.webp"],
     },
     robots: { index: false, follow: false },
