@@ -54,6 +54,7 @@ export function InsurancePills() {
 
 export function PracticePhoneLink({ className }: { className?: string }) {
   const { clinic } = useClinic()
+  if (!clinic.phone) return null
   return (
     <a href={clinic.phoneHref} className={className}>
       <Phone className="size-4 text-primary" /> {clinic.phone}
@@ -83,12 +84,14 @@ export function PracticeContactCard() {
               <span className="block text-muted-foreground">{clinic.cityLine}</span>
             </span>
           </li>
-          <li className="flex gap-3">
-            <Phone className="mt-0.5 size-4.5 shrink-0 text-primary" />
-            <a href={clinic.phoneHref} className="font-medium text-ink hover:text-primary">
-              {clinic.phone}
-            </a>
-          </li>
+          {clinic.phone && (
+            <li className="flex gap-3">
+              <Phone className="mt-0.5 size-4.5 shrink-0 text-primary" />
+              <a href={clinic.phoneHref} className="font-medium text-ink hover:text-primary">
+                {clinic.phone}
+              </a>
+            </li>
+          )}
           <li className="flex gap-3">
             <Mail className="mt-0.5 size-4.5 shrink-0 text-primary" />
             <span className="font-medium text-ink">{clinic.email}</span>
@@ -126,7 +129,7 @@ export function PracticeAboutCopy() {
         the way of care.
       </p>
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-        If something needs a human, {clinic.assistantName} hands you to our front desk at {clinic.phone}. In a medical emergency, call your local emergency number.
+        If something needs a human, {clinic.assistantName} hands you to our front desk{clinic.phone ? ` at ${clinic.phone}` : ""}. In a medical emergency, call your local emergency number.
       </p>
       {demoMode && (
         <p className="mt-6 rounded-xl bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900">

@@ -53,12 +53,14 @@ export function SiteFooter() {
                 {clinic.cityLine}
               </span>
             </li>
-            <li className="flex gap-2">
-              <Phone className="mt-0.5 size-4 shrink-0 text-[#cdeee6]" />
-              <a href={clinic.phoneHref} className="hover:text-white">
-                {clinic.phone}
-              </a>
-            </li>
+            {clinic.phone && (
+              <li className="flex gap-2">
+                <Phone className="mt-0.5 size-4 shrink-0 text-[#cdeee6]" />
+                <a href={clinic.phoneHref} className="hover:text-white">
+                  {clinic.phone}
+                </a>
+              </li>
+            )}
             <li className="flex gap-2">
               <Mail className="mt-0.5 size-4 shrink-0 text-[#cdeee6]" />
               <a href={`mailto:${clinic.email}`} className="break-all hover:text-white">

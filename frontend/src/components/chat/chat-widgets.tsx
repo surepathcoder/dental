@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import type { BookedAppointment, ChatUI, Slot } from "@/lib/types"
 import { cn } from "@/lib/utils"
-import { useClinic } from "@/components/site/clinic-provider"
+import { usePhoneStyle } from "@/components/site/clinic-provider"
 
 export function SlotPicker({
   slots,
@@ -86,10 +86,8 @@ export function ContactCard({
   const [phone, setPhone] = useState(ui.prefill?.phone ?? "")
   const [email, setEmail] = useState(ui.prefill?.email ?? "")
   const [error, setError] = useState<string | null>(null)
-  const { prospect } = useClinic()
-  // A demo for a clinic abroad: their numbers and names, not Texas ones.
-  const abroad = Boolean(prospect && !["", "United States", "US", "USA"].includes(prospect.country))
-  const samplePhone = abroad ? "0712 345 678" : "(512) 555-0187"
+  // A clinic abroad: their numbers and names, not Texas ones.
+  const { abroad, samplePhone } = usePhoneStyle()
   const sampleName = abroad ? "Amina Juma" : "Jordan Miller"
   const phoneValid = (v: string) => (abroad ? /^\+?[\d\s().-]{9,20}$/.test(v) && v.replace(/\D/g, "").length >= 9 : PHONE_OK(v))
   const followUpMode = Boolean(ui.optional?.length)

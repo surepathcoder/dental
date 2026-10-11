@@ -45,7 +45,7 @@ function phoneHref(phone: string) {
   if (phone.trim().startsWith("+")) return `tel:+${d}` // international already (+255 …): keep its country code
   if (d.length === 11 && d.startsWith("1")) return `tel:+${d}`
   if (d.length === 10 && !d.startsWith("0")) return `tel:+1${d}` // a US number; "0712 …" is a local one
-  return phone ? `tel:${phone}` : fallbackClinic.phoneHref
+  return phone ? `tel:${phone}` : "" // no number set: callers hide their Call links
 }
 
 /** "+255788479534" → "+255 788 479 534"; numbers already spaced, or not international, stay as written. */
@@ -178,6 +178,15 @@ export function useClinic() {
 }
 
 const MARKETING_SLUGS = new Set<string>(fallbackServices.map((s) => s.slug))
+
+/** A clinic outside the US (a prospect's preview abroad, or the sample site set to Dar es Salaam) takes local numbers. */
+export function usePhoneStyle() {
+  const { prospect, clinic } = useClinic()
+  const abroad = prospect
+    ? !["", "United States", "US", "USA"].includes(prospect.country)
+    : !(clinic.raw?.timezone || "America/").startsWith("America/")
+  return { abroad, samplePhone: abroad ? "0712 345 678" : "(512) 555-0187" }
+}
 
 export function serviceHref(slug: string) {
   return MARKETING_SLUGS.has(slug) ? `/services/${slug}` : `/book?service=${encodeURIComponent(slug)}`

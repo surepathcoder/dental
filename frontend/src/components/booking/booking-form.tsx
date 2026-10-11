@@ -6,7 +6,7 @@ import { AlertCircle, CalendarCheck2, CalendarDays, Check, Loader2, ShieldAlert,
 
 import { AutomationTimeline } from "@/components/chat/automation-timeline"
 import { useChat } from "@/components/chat/chat-provider"
-import { useClinic } from "@/components/site/clinic-provider"
+import { useClinic, usePhoneStyle } from "@/components/site/clinic-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -38,6 +38,7 @@ const STEPS = ["Service", "Time", "Your details"]
 export function BookingForm({ defaultService }: { defaultService?: string }) {
   const { openWith } = useChat()
   const { clinic, demoMode } = useClinic()
+  const { samplePhone } = usePhoneStyle()
   const catalog = clinic.activeServices
   const insurers = [...clinic.insurance, "Other insurance", "No insurance (self-pay)", "Not sure"]
   const [step, setStep] = useState(0)
@@ -138,7 +139,7 @@ export function BookingForm({ defaultService }: { defaultService?: string }) {
               ["Dentist", result.appointment.provider_name ?? "Our team"],
               ["Clinic", `${clinic.name}, ${clinic.address}`],
               ["Phone", clinic.phone],
-            ].map(([k, v]) => (
+            ].filter(([, v]) => v).map(([k, v]) => (
               <div key={k}>
                 <dt className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{k}</dt>
                 <dd className="mt-0.5 text-sm font-medium text-ink">{v}</dd>
@@ -300,7 +301,7 @@ export function BookingForm({ defaultService }: { defaultService?: string }) {
               </div>
               <div className="grid gap-1.5">
                 <Label htmlFor="b-phone">Mobile number</Label>
-                <Input id="b-phone" required inputMode="tel" maxLength={20} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="(512) 555-0187" className="h-11" />
+                <Input id="b-phone" required inputMode="tel" maxLength={20} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder={samplePhone} className="h-11" />
               </div>
               <div className="grid gap-1.5">
                 <Label htmlFor="b-email">Email</Label>

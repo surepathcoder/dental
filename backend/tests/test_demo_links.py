@@ -70,3 +70,13 @@ def test_a_link_card_fetch_is_not_counted_as_an_open(client):
     assert client.get(f"/api/demo-links/{token}/stats", headers=ADMIN).json()["views"] == before
     client.get(f"/api/demo-links/{token}")
     assert client.get(f"/api/demo-links/{token}/stats", headers=ADMIN).json()["views"] == before + 1
+
+
+def test_tanzanian_numbers_are_kept_as_written():
+    from app.schemas import normalize_us_phone as norm
+    assert norm("(512) 555-0111") == "(512) 555-0111" and norm("+1 512 555 0111") == "(512) 555-0111"
+    assert norm("+255 712 345 678") == "+255 712 345 678"
+    assert norm("0712 345 678") == "0712 345 678"
+    import pytest
+    with pytest.raises(ValueError):
+        norm("12345")

@@ -274,7 +274,7 @@ export function ChatPanel({ variant = "widget" }: { variant?: "widget" | "embed"
                 </p>
               </div>
               <div className="flex flex-wrap gap-1.5 pl-9">
-                {["Book an appointment", "Do you accept Delta Dental?", "Do you offer Invisalign?", "What are your hours?", "I have a dental emergency"].map((q) => (
+                {["Book an appointment", "Do you accept my insurance?", "Do you offer Invisalign?", "What are your hours?", "I have a dental emergency"].map((q) => (
                   <button
                     key={q}
                     type="button"

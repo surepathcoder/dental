@@ -90,14 +90,14 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
+          {live.phone && <a
             href={live.phoneHref}
             aria-label={`Call ${live.phone}`}
             title={live.phone}
             className="hidden size-11 items-center justify-center rounded-full border text-primary transition-colors hover:bg-secondary xl:inline-flex"
           >
             <Phone className="size-4" />
-          </a>
+          </a>}
           <Button asChild className="hidden h-11 rounded-full px-5 text-xs sm:inline-flex">
             <Link href="/book">
               Book a visit <ArrowUpRight className="size-4" />
@@ -144,11 +144,13 @@ export function SiteHeader() {
                 <Button asChild className="mt-4 h-11 rounded-full" onClick={() => setMobileOpen(false)}>
                   <Link href="/book">Book an Appointment</Link>
                 </Button>
-                <Button asChild variant="outline" className="h-11 rounded-full">
-                  <a href={live.phoneHref}>
-                    <Phone /> {live.phone}
-                  </a>
-                </Button>
+                {live.phone && (
+                  <Button asChild variant="outline" className="h-11 rounded-full">
+                    <a href={live.phoneHref}>
+                      <Phone /> {live.phone}
+                    </a>
+                  </Button>
+                )}
               </nav>
             </SheetContent>
           </Sheet>

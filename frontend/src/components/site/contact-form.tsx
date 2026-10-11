@@ -10,10 +10,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { track } from "@/lib/analytics"
 import { api, type ApiError } from "@/lib/api"
-import { useClinic } from "@/components/site/clinic-provider"
+import { useClinic, usePhoneStyle } from "@/components/site/clinic-provider"
 
 export function ContactForm() {
   const { clinic, demoMode } = useClinic()
+  const { samplePhone } = usePhoneStyle()
   const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" })
   const [state, setState] = useState<"idle" | "sending" | "done">("idle")
   const [error, setError] = useState<string | null>(null)
@@ -66,7 +67,7 @@ export function ContactForm() {
         </div>
         <div className="grid gap-1.5">
           <Label htmlFor="c-phone">Phone</Label>
-          <Input id="c-phone" inputMode="tel" maxLength={20} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="h-11" placeholder="(512) 555-0187" />
+          <Input id="c-phone" inputMode="tel" maxLength={20} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="h-11" placeholder={samplePhone} />
         </div>
         <div className="grid gap-1.5">
           <Label htmlFor="c-email">Email</Label>

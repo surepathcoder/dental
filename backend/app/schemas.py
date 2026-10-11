@@ -23,11 +23,14 @@ def normalize_us_phone(value: str | None) -> str | None:
     if value is None:
         return None
     digits = PHONE_DIGITS.sub("", value)
-    if len(digits) == 11 and digits.startswith("1"):
-        digits = digits[1:]
-    if len(digits) != 10:
-        raise ValueError("Please enter a valid 10-digit US phone number")
-    return f"({digits[:3]}) {digits[3:6]}-{digits[6:]}"
+    if not value.strip().startswith("+") or (len(digits) == 11 and digits.startswith("1")):
+        us = digits[1:] if len(digits) == 11 and digits.startswith("1") else digits
+        if len(us) == 10 and us[0] not in "01":
+            return f"({us[:3]}) {us[3:6]}-{us[6:]}"
+    # Not a US number: a clinic abroad ("+255 712 345 678", "0712 345 678") keeps it as written.
+    if 9 <= len(digits) <= 15:
+        return re.sub(r"\s+", " ", value.strip())[:20]
+    raise ValueError("Please enter a valid phone number")
 
 
 def clean_text(value: str | None, max_len: int) -> str | None:
