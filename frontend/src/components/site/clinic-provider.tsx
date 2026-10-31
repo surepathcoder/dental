@@ -94,13 +94,13 @@ function fromInfo(info: ClinicInfo | null): LiveClinic {
       state: "",
       faqs: fallbackFaqs.map((f) => ({ question: f.q, answer: f.a })),
       activeServices: fallbackServices.map((s) => ({ slug: s.slug, name: s.name, short: s.short, duration: s.duration })),
-      primaryColor: "#0f6b70",
+      primaryColor: "#1d3f9e",
       raw: null,
     }
   }
   const assistant = (info.settings?.assistant ?? {}) as Record<string, unknown>
   const brand = (info.settings?.brand ?? {}) as Record<string, unknown>
-  const color = String(brand.primary_color || "#0f6b70")
+  const color = String(brand.primary_color || "#1d3f9e")
   const liveServices = (info.services ?? []).filter((s) => s.is_active)
   return {
     name: info.name,
@@ -126,7 +126,7 @@ function fromInfo(info: ClinicInfo | null): LiveClinic {
           duration: `About ${s.duration_minutes} minutes`,
         }))
       : fallbackServices.map((s) => ({ slug: s.slug, name: s.name, short: s.short, duration: s.duration })),
-    primaryColor: /^#[0-9A-Fa-f]{6}$/.test(color) ? color : "#0f6b70",
+    primaryColor: /^#[0-9A-Fa-f]{6}$/.test(color) ? color : "#1d3f9e",
     raw: info,
   }
 }

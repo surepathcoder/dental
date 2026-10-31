@@ -249,8 +249,8 @@ export default function SettingsPage() {
                 <Label htmlFor="brand-color">Widget / brand color</Label>
                 <Input
                   id="brand-color"
-                  placeholder="#0f6b70"
-                  value={String(brand.primary_color ?? "#0f6b70")}
+                  placeholder="#1d3f9e"
+                  value={String(brand.primary_color ?? "#1d3f9e")}
                   onChange={(e) => setSetting("brand", "primary_color", e.target.value)}
                 />
               </div>
@@ -286,7 +286,7 @@ export default function SettingsPage() {
               readOnly
               rows={4}
               className="font-mono text-xs"
-              value={`<script src="${typeof window === "undefined" ? "https://your-practice-url" : window.location.origin}/widget.js" data-origin="${typeof window === "undefined" ? "https://your-practice-url" : window.location.origin}" data-color="${String(brand.primary_color ?? "#0f6b70")}" data-label="Ask our AI receptionist" async></script>`}
+              value={`<script src="${typeof window === "undefined" ? "https://your-practice-url" : window.location.origin}/widget.js" data-origin="${typeof window === "undefined" ? "https://your-practice-url" : window.location.origin}" data-color="${String(brand.primary_color ?? "#1d3f9e")}" data-label="Ask our AI receptionist" async></script>`}
             />
             <div className="mt-3 flex flex-wrap gap-2">
               <Button
@@ -295,7 +295,7 @@ export default function SettingsPage() {
                 variant="outline"
                 onClick={() => {
                   const origin = typeof window === "undefined" ? "" : window.location.origin
-                  const snippet = `<script src="${origin}/widget.js" data-origin="${origin}" data-color="${String(brand.primary_color ?? "#0f6b70")}" data-label="Ask our AI receptionist" async></script>`
+                  const snippet = `<script src="${origin}/widget.js" data-origin="${origin}" data-color="${String(brand.primary_color ?? "#1d3f9e")}" data-label="Ask our AI receptionist" async></script>`
                   void navigator.clipboard.writeText(snippet).then(
                     () => toast.success("Snippet copied"),
                     () => toast.error("Couldn't copy — select the snippet and copy it"),

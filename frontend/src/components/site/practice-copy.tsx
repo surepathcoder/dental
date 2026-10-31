@@ -5,6 +5,7 @@ import { Car, Clock, Mail, MapPin, Phone, Sparkles } from "lucide-react"
 import { ChatCTA } from "@/components/site/chat-cta"
 import { useClinic } from "@/components/site/clinic-provider"
 import { FinalCTA } from "@/components/site/shared"
+import { clinic as practice } from "@/lib/site"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 export function PracticeHeroCopy() {
@@ -84,6 +85,22 @@ export function PracticeContactCard() {
               <span className="block text-muted-foreground">{clinic.cityLine}</span>
             </span>
           </li>
+          {practice.locations.slice(1).map((loc) => (
+            <li key={loc.name} className="flex gap-3">
+              <MapPin className="mt-0.5 size-4.5 shrink-0 text-primary" />
+              <span>
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(`${loc.address}, Dar es Salaam`)}`}
+                  className="block font-medium text-ink hover:text-primary"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {loc.address}
+                </a>
+                <span className="block text-muted-foreground">{loc.name}, Dar es Salaam</span>
+              </span>
+            </li>
+          ))}
           {clinic.phone && (
             <li className="flex gap-3">
               <Phone className="mt-0.5 size-4.5 shrink-0 text-primary" />
@@ -92,10 +109,12 @@ export function PracticeContactCard() {
               </a>
             </li>
           )}
-          <li className="flex gap-3">
-            <Mail className="mt-0.5 size-4.5 shrink-0 text-primary" />
-            <span className="font-medium text-ink">{clinic.email}</span>
-          </li>
+          {clinic.email && (
+            <li className="flex gap-3">
+              <Mail className="mt-0.5 size-4.5 shrink-0 text-primary" />
+              <span className="font-medium text-ink">{clinic.email}</span>
+            </li>
+          )}
           <li className="flex gap-3">
             <Car className="mt-0.5 size-4.5 shrink-0 text-primary" />
             <span className="text-muted-foreground">Free covered parking in front of the building.</span>

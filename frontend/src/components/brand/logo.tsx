@@ -13,18 +13,18 @@ export function ToothMark({ className }: { className?: string }) {
   )
 }
 
-export function Logo({ className, light = false, name, city }: { className?: string; light?: boolean; name?: string; city?: string }) {
-  const display = (name || "BrightSmile").replace(/\s+Dental$/i, "")
-  const place = city || "Dental"
+export function Logo({ className, light = false, name }: { className?: string; light?: boolean; name?: string; city?: string }) {
+  const display = name || "Bright Dental Clinic"
   return (
     <span className={cn("brand-logo inline-flex items-center gap-2.5", className)}>
-      <ToothMark />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/bright-mark.png" alt="" aria-hidden="true" className="size-10 rounded-lg bg-white object-contain p-0.5" />
       <span className={cn("leading-none", light ? "text-white" : "text-ink")}>
         <span className="brand-name font-display block text-[1.15rem] font-semibold tracking-tight">{display}</span>
         <span
           className={cn("mt-1 block text-[0.55rem] font-semibold uppercase tracking-[0.24em]", light ? "text-white/70" : "text-primary")}
         >
-          {place}
+          Smile Better With Us
         </span>
       </span>
     </span>

@@ -406,7 +406,10 @@ class ClinicOut(ORM):
 
 
 class ServicePatch(BaseModel):
-    id: int
+    id: int | None = None  # no id: add a new service (name required)
+    name: str | None = Field(default=None, min_length=2, max_length=120)
+    slug: str | None = Field(default=None, pattern=r"^[a-z0-9-]{2,80}$")
+    sort_order: int | None = Field(default=None, ge=0, le=1000)
     is_active: bool | None = None
     duration_minutes: int | None = Field(default=None, ge=10, le=240)
     price_note: str | None = Field(default=None, max_length=300)

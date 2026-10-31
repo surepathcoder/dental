@@ -56,7 +56,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* BrightSmile design tokens — deep teal (trust), warm sand (comfort), ink navy (text). */
+/* Bright Dental Clinic tokens — royal blue (trust), warm sand (comfort), ink navy (text). */
 :root {
   --background: oklch(0.99 0.003 85);
   --foreground: oklch(0.25 0.035 240);
@@ -64,7 +64,7 @@
   --card-foreground: oklch(0.25 0.035 240);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.25 0.035 240);
-  --primary: oklch(0.47 0.08 196);
+  --primary: oklch(0.40 0.15 265);
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.96 0.018 185);
   --secondary-foreground: oklch(0.33 0.06 200);
@@ -95,7 +95,7 @@
   --radius: 0.75rem;
   --sidebar: oklch(0.985 0.004 85);
   --sidebar-foreground: oklch(0.25 0.035 240);
-  --sidebar-primary: oklch(0.47 0.08 196);
+  --sidebar-primary: oklch(0.40 0.15 265);
   --sidebar-primary-foreground: oklch(0.99 0 0);
   --sidebar-accent: oklch(0.955 0.02 185);
   --sidebar-accent-foreground: oklch(0.3 0.05 210);

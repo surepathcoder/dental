@@ -3,7 +3,7 @@
   --background: #f7fbfa;
   --foreground: #10292e;
   --ink: #10292e;
-  --primary: var(--marketing-primary, #0f6b70);
+  --primary: var(--marketing-primary, #1d3f9e);
   --primary-foreground: #ffffff;
   --secondary: #e7f2f0;
   --secondary-foreground: #10292e;
@@ -12,7 +12,7 @@
   --border: #d6e6e3;
   --sand: #ecf5f3;
   --mint: #dff3ee;
-  --ring: #0f6b70;
+  --ring: #1d3f9e;
   --accent: #ebf4f2;
   --accent-foreground: #10292e;
   background: var(--background);
@@ -176,7 +176,7 @@
   font-family: var(--font-fraunces), Georgia, serif;
   font-weight: 400;
   letter-spacing: -0.055em;
-  color: #0f6b70;
+  color: #1d3f9e;
 }
 .editorial-section-head {
   display: grid;
@@ -240,7 +240,7 @@
   animation: title-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .title-line > em {
-  color: #0f6b70;
+  color: #1d3f9e;
   font-family: var(--font-fraunces), Georgia, serif;
   font-weight: 400;
   letter-spacing: -0.065em;
@@ -601,7 +601,7 @@
 .care-principles > div > span {
   font-size: 10px;
   padding-top: 4px;
-  color: #0f6b70;
+  color: #1d3f9e;
 }
 .care-principles h3 {
   font-size: 14px;
@@ -1004,7 +1004,7 @@
 .sales-site .hero-copy h1 > span {
   font-family: var(--font-fraunces), Georgia, serif;
   font-style: italic;
-  color: #0f6b70;
+  color: #1d3f9e;
   font-weight: 400;
 }
 .sales-site .hero-visual {

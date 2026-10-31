@@ -5,6 +5,7 @@ import { ArrowUpRight, Clock, Mail, MapPin, Phone } from "lucide-react"
 
 import { Logo } from "@/components/brand/logo"
 import { serviceHref, useClinic } from "@/components/site/clinic-provider"
+import { clinic as practice } from "@/lib/site"
 
 export function SiteFooter() {
   const { clinic, demoMode } = useClinic()
@@ -53,6 +54,12 @@ export function SiteFooter() {
                 {clinic.cityLine}
               </span>
             </li>
+            {practice.locations.slice(1).map((loc) => (
+              <li key={loc.name} className="flex gap-2">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-[#cdeee6]" />
+                <span>{loc.address}</span>
+              </li>
+            ))}
             {clinic.phone && (
               <li className="flex gap-2">
                 <Phone className="mt-0.5 size-4 shrink-0 text-[#cdeee6]" />
