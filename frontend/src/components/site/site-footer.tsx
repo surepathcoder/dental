@@ -68,12 +68,14 @@ export function SiteFooter() {
                 </a>
               </li>
             )}
-            <li className="flex gap-2">
-              <Mail className="mt-0.5 size-4 shrink-0 text-[#cdeee6]" />
-              <a href={`mailto:${clinic.email}`} className="break-all hover:text-white">
-                {clinic.email}
-              </a>
-            </li>
+            {clinic.email && (
+              <li className="flex gap-2">
+                <Mail className="mt-0.5 size-4 shrink-0 text-[#cdeee6]" />
+                <a href={`mailto:${clinic.email}`} className="break-all hover:text-white">
+                  {clinic.email}
+                </a>
+              </li>
+            )}
           </ul>
         </div>
         <div>

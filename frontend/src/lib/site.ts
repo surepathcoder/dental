@@ -26,7 +26,7 @@ export const clinic = {
     { day: "Saturday", hours: "9:00 AM – 1:00 PM" },
     { day: "Sunday", hours: "Closed" },
   ],
-  insurance: ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "United Concordia", "Blue Cross Blue Shield", "Humana"],
+  insurance: [] as string[],
   financing: [
     { name: "CareCredit", detail: "Flexible monthly payments, with promotional financing on qualifying treatment." },
     { name: "Sunbit", detail: "Quick approval at the front desk with transparent monthly plans." },

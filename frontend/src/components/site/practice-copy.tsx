@@ -40,6 +40,18 @@ export function PracticeHeroCopy() {
   )
 }
 
+/** "Let's talk coverage" with the accepted plans — hidden when the clinic lists none. */
+export function HomeCoverage() {
+  const { clinic } = useClinic()
+  if (!clinic.insurance.length) return null
+  return (
+    <div className="insurance-line">
+      <span>LET’S TALK COVERAGE</span>
+      <InsurancePills />
+    </div>
+  )
+}
+
 export function InsurancePills() {
   const { clinic } = useClinic()
   return (

@@ -107,11 +107,11 @@ function fromInfo(info: ClinicInfo | null): LiveClinic {
     tagline: info.tagline || fallbackClinic.tagline,
     phone: formatPhone(info.phone),
     phoneHref: phoneHref(info.phone),
-    email: info.email,
+    email: info.email.endsWith(".example") ? "" : info.email, // a placeholder address is not shown
     address: info.address_line,
     cityLine: `${info.city}, ${info.state} ${info.zip_code}`.trim(),
     hours: hoursList(info.hours),
-    insurance: info.insurance_accepted?.length ? info.insurance_accepted : fallbackClinic.insurance,
+    insurance: info.insurance_accepted ?? [],
     assistantName: String(assistant.name || "Ava"),
     greeting: String(assistant.greeting || ""),
     city: info.city,

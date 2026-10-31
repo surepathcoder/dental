@@ -4,7 +4,7 @@ import { ArrowDown, ArrowDownRight, ArrowUpRight, Plus } from "lucide-react"
 
 import { ChatCTA } from "@/components/site/chat-cta"
 import { ConversationPreview } from "@/components/site/motion"
-import { HomeFaqs, InsurancePills, PracticeHeroCopy } from "@/components/site/practice-copy"
+import { HomeFaqs, HomeCoverage, PracticeHeroCopy } from "@/components/site/practice-copy"
 import { QuickBooking } from "@/components/site/quick-booking"
 import { TreatmentExplorer } from "@/components/site/treatment-explorer"
 import { FinalCTA } from "@/components/site/shared"
@@ -244,10 +244,7 @@ export default function HomePage() {
         </div>
         <div data-reveal>
           <HomeFaqs limit={5} />
-          <div className="insurance-line">
-            <span>LET’S TALK COVERAGE</span>
-            <InsurancePills />
-          </div>
+          <HomeCoverage />
         </div>
       </section>
       <FinalCTA
